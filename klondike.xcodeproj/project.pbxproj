@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		D49703082831C92800CD0FED /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D49703072831C92800CD0FED /* Contacts.framework */; };
 		D497030C2831F27700CD0FED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D497030B2831F27700CD0FED /* main.m */; };
+		D497030F2832FD4C00CD0FED /* apple_contacts.m in Sources */ = {isa = PBXBuildFile; fileRef = D497030E2832FD4C00CD0FED /* apple_contacts.m */; };
+		D497031D283311BB00CD0FED /* contacts.c in Sources */ = {isa = PBXBuildFile; fileRef = D497031C283311BB00CD0FED /* contacts.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +31,14 @@
 		D497030A2831F01900CD0FED /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D497030B2831F27700CD0FED /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D497030D2831F2B500CD0FED /* klondike.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = klondike.entitlements; sourceTree = "<group>"; };
+		D497030E2832FD4C00CD0FED /* apple_contacts.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = apple_contacts.m; sourceTree = "<group>"; };
+		D49703102832FD5D00CD0FED /* apple_contacts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = apple_contacts.h; sourceTree = "<group>"; };
+		D49703112832FE8900CD0FED /* contact.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = contact.h; sourceTree = "<group>"; };
+		D49703142832FEED00CD0FED /* contact_type.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = contact_type.h; sourceTree = "<group>"; };
+		D49703152833015300CD0FED /* email.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = email.h; sourceTree = "<group>"; };
+		D49703182833018D00CD0FED /* phone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = phone.h; sourceTree = "<group>"; };
+		D497031B283311BB00CD0FED /* contacts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = contacts.h; sourceTree = "<group>"; };
+		D497031C283311BB00CD0FED /* contacts.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = contacts.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,8 +56,16 @@
 		D49702F32831C89800CD0FED = {
 			isa = PBXGroup;
 			children = (
+				D49703102832FD5D00CD0FED /* apple_contacts.h */,
+				D497030E2832FD4C00CD0FED /* apple_contacts.m */,
+				D49703112832FE8900CD0FED /* contact.h */,
+				D49703142832FEED00CD0FED /* contact_type.h */,
+				D497031B283311BB00CD0FED /* contacts.h */,
+				D497031C283311BB00CD0FED /* contacts.c */,
+				D49703152833015300CD0FED /* email.h */,
 				D497030D2831F2B500CD0FED /* klondike.entitlements */,
 				D497030B2831F27700CD0FED /* main.m */,
+				D49703182833018D00CD0FED /* phone.h */,
 				D497030A2831F01900CD0FED /* README.md */,
 				D49702FD2831C89900CD0FED /* Products */,
 				D49703062831C92800CD0FED /* Frameworks */,
@@ -127,6 +145,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D497030F2832FD4C00CD0FED /* apple_contacts.m in Sources */,
+				D497031D283311BB00CD0FED /* contacts.c in Sources */,
 				D497030C2831F27700CD0FED /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
