@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D47EBB5C283425130045A686 /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = D47EBB5B283425130045A686 /* error.c */; };
 		D49703082831C92800CD0FED /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D49703072831C92800CD0FED /* Contacts.framework */; };
 		D497030C2831F27700CD0FED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D497030B2831F27700CD0FED /* main.m */; };
 		D497030F2832FD4C00CD0FED /* apple_contacts.m in Sources */ = {isa = PBXBuildFile; fileRef = D497030E2832FD4C00CD0FED /* apple_contacts.m */; };
@@ -26,6 +27,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D47EBB5A283425130045A686 /* error.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = error.h; sourceTree = "<group>"; };
+		D47EBB5B283425130045A686 /* error.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = error.c; sourceTree = "<group>"; };
 		D49702FC2831C89900CD0FED /* klondike */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = klondike; sourceTree = BUILT_PRODUCTS_DIR; };
 		D49703072831C92800CD0FED /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		D497030A2831F01900CD0FED /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -63,6 +66,8 @@
 				D497031B283311BB00CD0FED /* contacts.h */,
 				D497031C283311BB00CD0FED /* contacts.c */,
 				D49703152833015300CD0FED /* email.h */,
+				D47EBB5A283425130045A686 /* error.h */,
+				D47EBB5B283425130045A686 /* error.c */,
 				D497030D2831F2B500CD0FED /* klondike.entitlements */,
 				D497030B2831F27700CD0FED /* main.m */,
 				D49703182833018D00CD0FED /* phone.h */,
@@ -115,7 +120,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastUpgradeCheck = 1330;
+				LastUpgradeCheck = 1340;
 				TargetAttributes = {
 					D49702FB2831C89900CD0FED = {
 						CreatedOnToolsVersion = 13.3.1;
@@ -147,6 +152,7 @@
 			files = (
 				D497030F2832FD4C00CD0FED /* apple_contacts.m in Sources */,
 				D497031D283311BB00CD0FED /* contacts.c in Sources */,
+				D47EBB5C283425130045A686 /* error.c in Sources */,
 				D497030C2831F27700CD0FED /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,6 +273,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = klondike.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K39VF43BJL;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -278,6 +285,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = klondike.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K39VF43BJL;
 				ENABLE_HARDENED_RUNTIME = YES;

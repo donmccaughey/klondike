@@ -3,10 +3,11 @@
 
 
 struct contact;
+struct error;
 
 
 typedef void
-(receive_contacts_fn)(struct contact *contacts, int count);
+(receive_contacts_fn)(struct contact *contacts, int count, struct error *error);
 
 
 void
