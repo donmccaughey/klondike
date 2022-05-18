@@ -42,7 +42,7 @@ free_error(struct error *error)
 }
 
 
-void
+noreturn void
 halt_on_error(struct error *error)
 {
     print_error(error);
@@ -51,7 +51,7 @@ halt_on_error(struct error *error)
 }
 
 
-void
+noreturn void
 halt_on_internal_error(char const *message)
 {
     fprintf(stderr, "Internal Error: %s\n", message);
@@ -59,7 +59,7 @@ halt_on_internal_error(char const *message)
 }
 
 
-void
+noreturn void
 halt_on_out_of_memory(void)
 {
     fprintf(stderr, "Error: Out of memory\n");

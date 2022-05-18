@@ -2,6 +2,9 @@
 #define ERROR_H_INCLUDED
 
 
+#include <stdnoreturn.h>
+
+
 enum error_type {
     error_type_unknown = 0,
     error_type_out_of_memory,
@@ -24,13 +27,13 @@ alloc_error(enum error_type type, int code, char const *message);
 void
 free_error(struct error *error);
 
-void
+noreturn void
 halt_on_error(struct error *error);
 
-void
+noreturn void
 halt_on_internal_error(char const *message);
 
-void
+noreturn void
 halt_on_out_of_memory(void);
 
 void
