@@ -12,16 +12,13 @@ receive_contacts(struct options *options,
                  int count,
                  struct error *error)
 {
-    if (contacts) {
-        struct error *e = save_contacts(options, contacts, count);
-        if (e) halt_on_error(e);
-        
-        free_contacts(contacts, count);
-        free_options(options);
-        exit(EXIT_SUCCESS);
-    } else {
-        halt_on_error(error);
-    }
+    if (error) halt_on_error(error);
+    
+    error = save_contacts(options, contacts, count);
+    if (error) halt_on_error(error);
+    
+    free_contacts(contacts, count);
+    free_options(options);
 }
 
 
