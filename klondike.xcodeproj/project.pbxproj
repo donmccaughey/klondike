@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D47EBB5C283425130045A686 /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = D47EBB5B283425130045A686 /* error.c */; };
-		D47EBB5F2835A6000045A686 /* options.c in Sources */ = {isa = PBXBuildFile; fileRef = D47EBB5E2835A6000045A686 /* options.c */; };
-		D47EBB622835AA680045A686 /* memory.c in Sources */ = {isa = PBXBuildFile; fileRef = D47EBB612835AA680045A686 /* memory.c */; };
-		D47EBB652835ED340045A686 /* csv.c in Sources */ = {isa = PBXBuildFile; fileRef = D47EBB642835ED340045A686 /* csv.c */; };
+		D47EBB792836D5DC0045A686 /* contacts.c in Sources */ = {isa = PBXBuildFile; fileRef = D47EBB6C2836D5DC0045A686 /* contacts.c */; };
+		D47EBB7A2836D5DC0045A686 /* memory.c in Sources */ = {isa = PBXBuildFile; fileRef = D47EBB6D2836D5DC0045A686 /* memory.c */; };
+		D47EBB7B2836D5DC0045A686 /* apple_contacts.m in Sources */ = {isa = PBXBuildFile; fileRef = D47EBB6E2836D5DC0045A686 /* apple_contacts.m */; };
+		D47EBB7C2836D5DC0045A686 /* csv.c in Sources */ = {isa = PBXBuildFile; fileRef = D47EBB712836D5DC0045A686 /* csv.c */; };
+		D47EBB7D2836D5DC0045A686 /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = D47EBB722836D5DC0045A686 /* error.c */; };
+		D47EBB7E2836D5DC0045A686 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D47EBB732836D5DC0045A686 /* main.m */; };
+		D47EBB7F2836D5DC0045A686 /* options.c in Sources */ = {isa = PBXBuildFile; fileRef = D47EBB782836D5DC0045A686 /* options.c */; };
 		D49703082831C92800CD0FED /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D49703072831C92800CD0FED /* Contacts.framework */; };
-		D497030C2831F27700CD0FED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D497030B2831F27700CD0FED /* main.m */; };
-		D497030F2832FD4C00CD0FED /* apple_contacts.m in Sources */ = {isa = PBXBuildFile; fileRef = D497030E2832FD4C00CD0FED /* apple_contacts.m */; };
-		D497031D283311BB00CD0FED /* contacts.c in Sources */ = {isa = PBXBuildFile; fileRef = D497031C283311BB00CD0FED /* contacts.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,27 +30,27 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D47EBB5A283425130045A686 /* error.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = error.h; sourceTree = "<group>"; };
-		D47EBB5B283425130045A686 /* error.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = error.c; sourceTree = "<group>"; };
-		D47EBB5D2835A6000045A686 /* options.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = options.h; sourceTree = "<group>"; };
-		D47EBB5E2835A6000045A686 /* options.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = options.c; sourceTree = "<group>"; };
-		D47EBB602835AA680045A686 /* memory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = memory.h; sourceTree = "<group>"; };
-		D47EBB612835AA680045A686 /* memory.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = memory.c; sourceTree = "<group>"; };
-		D47EBB632835ED340045A686 /* csv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = csv.h; sourceTree = "<group>"; };
-		D47EBB642835ED340045A686 /* csv.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = csv.c; sourceTree = "<group>"; };
+		D47EBB682836D5DC0045A686 /* csv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = csv.h; sourceTree = "<group>"; };
+		D47EBB692836D5DC0045A686 /* error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = error.h; sourceTree = "<group>"; };
+		D47EBB6A2836D5DC0045A686 /* email.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = email.h; sourceTree = "<group>"; };
+		D47EBB6B2836D5DC0045A686 /* phone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = phone.h; sourceTree = "<group>"; };
+		D47EBB6C2836D5DC0045A686 /* contacts.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = contacts.c; sourceTree = "<group>"; };
+		D47EBB6D2836D5DC0045A686 /* memory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = memory.c; sourceTree = "<group>"; };
+		D47EBB6E2836D5DC0045A686 /* apple_contacts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = apple_contacts.m; sourceTree = "<group>"; };
+		D47EBB6F2836D5DC0045A686 /* options.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = options.h; sourceTree = "<group>"; };
+		D47EBB702836D5DC0045A686 /* contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = contact.h; sourceTree = "<group>"; };
+		D47EBB712836D5DC0045A686 /* csv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = csv.c; sourceTree = "<group>"; };
+		D47EBB722836D5DC0045A686 /* error.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = error.c; sourceTree = "<group>"; };
+		D47EBB732836D5DC0045A686 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D47EBB742836D5DC0045A686 /* contacts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = contacts.h; sourceTree = "<group>"; };
+		D47EBB752836D5DC0045A686 /* memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = memory.h; sourceTree = "<group>"; };
+		D47EBB762836D5DC0045A686 /* apple_contacts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apple_contacts.h; sourceTree = "<group>"; };
+		D47EBB772836D5DC0045A686 /* contact_type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = contact_type.h; sourceTree = "<group>"; };
+		D47EBB782836D5DC0045A686 /* options.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = options.c; sourceTree = "<group>"; };
 		D49702FC2831C89900CD0FED /* klondike */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = klondike; sourceTree = BUILT_PRODUCTS_DIR; };
 		D49703072831C92800CD0FED /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		D497030A2831F01900CD0FED /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		D497030B2831F27700CD0FED /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D497030D2831F2B500CD0FED /* klondike.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = klondike.entitlements; sourceTree = "<group>"; };
-		D497030E2832FD4C00CD0FED /* apple_contacts.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = apple_contacts.m; sourceTree = "<group>"; };
-		D49703102832FD5D00CD0FED /* apple_contacts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = apple_contacts.h; sourceTree = "<group>"; };
-		D49703112832FE8900CD0FED /* contact.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = contact.h; sourceTree = "<group>"; };
-		D49703142832FEED00CD0FED /* contact_type.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = contact_type.h; sourceTree = "<group>"; };
-		D49703152833015300CD0FED /* email.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = email.h; sourceTree = "<group>"; };
-		D49703182833018D00CD0FED /* phone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = phone.h; sourceTree = "<group>"; };
-		D497031B283311BB00CD0FED /* contacts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = contacts.h; sourceTree = "<group>"; };
-		D497031C283311BB00CD0FED /* contacts.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = contacts.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,27 +65,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D47EBB672836D5DC0045A686 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				D47EBB762836D5DC0045A686 /* apple_contacts.h */,
+				D47EBB6E2836D5DC0045A686 /* apple_contacts.m */,
+				D47EBB772836D5DC0045A686 /* contact_type.h */,
+				D47EBB702836D5DC0045A686 /* contact.h */,
+				D47EBB742836D5DC0045A686 /* contacts.h */,
+				D47EBB6C2836D5DC0045A686 /* contacts.c */,
+				D47EBB682836D5DC0045A686 /* csv.h */,
+				D47EBB712836D5DC0045A686 /* csv.c */,
+				D47EBB6A2836D5DC0045A686 /* email.h */,
+				D47EBB692836D5DC0045A686 /* error.h */,
+				D47EBB722836D5DC0045A686 /* error.c */,
+				D47EBB732836D5DC0045A686 /* main.m */,
+				D47EBB752836D5DC0045A686 /* memory.h */,
+				D47EBB6D2836D5DC0045A686 /* memory.c */,
+				D47EBB6F2836D5DC0045A686 /* options.h */,
+				D47EBB782836D5DC0045A686 /* options.c */,
+				D47EBB6B2836D5DC0045A686 /* phone.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		D49702F32831C89800CD0FED = {
 			isa = PBXGroup;
 			children = (
-				D49703102832FD5D00CD0FED /* apple_contacts.h */,
-				D497030E2832FD4C00CD0FED /* apple_contacts.m */,
-				D49703112832FE8900CD0FED /* contact.h */,
-				D49703142832FEED00CD0FED /* contact_type.h */,
-				D497031B283311BB00CD0FED /* contacts.h */,
-				D497031C283311BB00CD0FED /* contacts.c */,
-				D47EBB632835ED340045A686 /* csv.h */,
-				D47EBB642835ED340045A686 /* csv.c */,
-				D49703152833015300CD0FED /* email.h */,
-				D47EBB5A283425130045A686 /* error.h */,
-				D47EBB5B283425130045A686 /* error.c */,
+				D47EBB672836D5DC0045A686 /* src */,
 				D497030D2831F2B500CD0FED /* klondike.entitlements */,
-				D497030B2831F27700CD0FED /* main.m */,
-				D47EBB602835AA680045A686 /* memory.h */,
-				D47EBB612835AA680045A686 /* memory.c */,
-				D47EBB5D2835A6000045A686 /* options.h */,
-				D47EBB5E2835A6000045A686 /* options.c */,
-				D49703182833018D00CD0FED /* phone.h */,
 				D497030A2831F01900CD0FED /* README.md */,
 				D49702FD2831C89900CD0FED /* Products */,
 				D49703062831C92800CD0FED /* Frameworks */,
@@ -165,13 +173,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D497030F2832FD4C00CD0FED /* apple_contacts.m in Sources */,
-				D47EBB5F2835A6000045A686 /* options.c in Sources */,
-				D497031D283311BB00CD0FED /* contacts.c in Sources */,
-				D47EBB5C283425130045A686 /* error.c in Sources */,
-				D47EBB622835AA680045A686 /* memory.c in Sources */,
-				D47EBB652835ED340045A686 /* csv.c in Sources */,
-				D497030C2831F27700CD0FED /* main.m in Sources */,
+				D47EBB7E2836D5DC0045A686 /* main.m in Sources */,
+				D47EBB7C2836D5DC0045A686 /* csv.c in Sources */,
+				D47EBB7F2836D5DC0045A686 /* options.c in Sources */,
+				D47EBB792836D5DC0045A686 /* contacts.c in Sources */,
+				D47EBB7B2836D5DC0045A686 /* apple_contacts.m in Sources */,
+				D47EBB7D2836D5DC0045A686 /* error.c in Sources */,
+				D47EBB7A2836D5DC0045A686 /* memory.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
