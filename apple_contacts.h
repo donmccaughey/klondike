@@ -4,14 +4,19 @@
 
 struct contact;
 struct error;
+struct options;
 
 
 typedef void
-(receive_contacts_fn)(struct contact *contacts, int count, struct error *error);
+(receive_contacts_fn)(struct options *options,
+                      struct contact *contacts,
+                      int count,
+                      struct error *error);
 
 
 void
-fetch_apple_contacts(receive_contacts_fn *receive_contacts);
+fetch_apple_contacts(struct options *options,
+                     receive_contacts_fn *receive_contacts);
 
 
 #endif

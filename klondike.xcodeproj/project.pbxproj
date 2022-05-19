@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		D47EBB5C283425130045A686 /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = D47EBB5B283425130045A686 /* error.c */; };
+		D47EBB5F2835A6000045A686 /* options.c in Sources */ = {isa = PBXBuildFile; fileRef = D47EBB5E2835A6000045A686 /* options.c */; };
+		D47EBB622835AA680045A686 /* memory.c in Sources */ = {isa = PBXBuildFile; fileRef = D47EBB612835AA680045A686 /* memory.c */; };
+		D47EBB652835ED340045A686 /* csv.c in Sources */ = {isa = PBXBuildFile; fileRef = D47EBB642835ED340045A686 /* csv.c */; };
 		D49703082831C92800CD0FED /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D49703072831C92800CD0FED /* Contacts.framework */; };
 		D497030C2831F27700CD0FED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D497030B2831F27700CD0FED /* main.m */; };
 		D497030F2832FD4C00CD0FED /* apple_contacts.m in Sources */ = {isa = PBXBuildFile; fileRef = D497030E2832FD4C00CD0FED /* apple_contacts.m */; };
@@ -29,6 +32,12 @@
 /* Begin PBXFileReference section */
 		D47EBB5A283425130045A686 /* error.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = error.h; sourceTree = "<group>"; };
 		D47EBB5B283425130045A686 /* error.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = error.c; sourceTree = "<group>"; };
+		D47EBB5D2835A6000045A686 /* options.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = options.h; sourceTree = "<group>"; };
+		D47EBB5E2835A6000045A686 /* options.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = options.c; sourceTree = "<group>"; };
+		D47EBB602835AA680045A686 /* memory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = memory.h; sourceTree = "<group>"; };
+		D47EBB612835AA680045A686 /* memory.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = memory.c; sourceTree = "<group>"; };
+		D47EBB632835ED340045A686 /* csv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = csv.h; sourceTree = "<group>"; };
+		D47EBB642835ED340045A686 /* csv.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = csv.c; sourceTree = "<group>"; };
 		D49702FC2831C89900CD0FED /* klondike */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = klondike; sourceTree = BUILT_PRODUCTS_DIR; };
 		D49703072831C92800CD0FED /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		D497030A2831F01900CD0FED /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -65,11 +74,17 @@
 				D49703142832FEED00CD0FED /* contact_type.h */,
 				D497031B283311BB00CD0FED /* contacts.h */,
 				D497031C283311BB00CD0FED /* contacts.c */,
+				D47EBB632835ED340045A686 /* csv.h */,
+				D47EBB642835ED340045A686 /* csv.c */,
 				D49703152833015300CD0FED /* email.h */,
 				D47EBB5A283425130045A686 /* error.h */,
 				D47EBB5B283425130045A686 /* error.c */,
 				D497030D2831F2B500CD0FED /* klondike.entitlements */,
 				D497030B2831F27700CD0FED /* main.m */,
+				D47EBB602835AA680045A686 /* memory.h */,
+				D47EBB612835AA680045A686 /* memory.c */,
+				D47EBB5D2835A6000045A686 /* options.h */,
+				D47EBB5E2835A6000045A686 /* options.c */,
 				D49703182833018D00CD0FED /* phone.h */,
 				D497030A2831F01900CD0FED /* README.md */,
 				D49702FD2831C89900CD0FED /* Products */,
@@ -151,8 +166,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D497030F2832FD4C00CD0FED /* apple_contacts.m in Sources */,
+				D47EBB5F2835A6000045A686 /* options.c in Sources */,
 				D497031D283311BB00CD0FED /* contacts.c in Sources */,
 				D47EBB5C283425130045A686 /* error.c in Sources */,
+				D47EBB622835AA680045A686 /* memory.c in Sources */,
+				D47EBB652835ED340045A686 /* csv.c in Sources */,
 				D497030C2831F27700CD0FED /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

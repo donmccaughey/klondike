@@ -2,14 +2,15 @@
 #define CONTACTS_H_INCLUDED
 
 
-#include <stdbool.h>
-
-
 struct contact;
+struct error;
+struct options;
 
 
-bool
-save_contacts(struct contact const *contacts, int count);
+struct error *
+save_contacts(struct options *options,
+              struct contact const *contacts,
+              int count);
 
 void
 free_contacts(struct contact *contacts, int count);

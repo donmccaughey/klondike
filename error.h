@@ -24,6 +24,9 @@ struct error {
 struct error *
 alloc_error(enum error_type type, int code, char const *message);
 
+struct error *
+alloc_stdlib_error(void);
+
 void
 free_error(struct error *error);
 

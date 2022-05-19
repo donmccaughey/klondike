@@ -3,20 +3,19 @@
 #import "apple_contacts.h"
 #import "contact.h"
 #import "error.h"
+#import "memory.h"
 
 
 static char *
 copy_string_or_halt(NSString *s)
 {
-    if (!s) return NULL;
-    char *dup = strdup(s.UTF8String);
-    if (!dup) halt_on_out_of_memory();
-    return dup;
+    return s ? strdup_or_halt(s.UTF8String) : NULL;
 }
 
 
 static void
-enumerate_contacts(CNContactStore *contactStore,
+enumerate_contacts(struct options *options,
+                   CNContactStore *contactStore,
                    receive_contacts_fn *receive_contacts)
 {
     NSArray<id<CNKeyDescriptor>> *keys = @[
@@ -40,7 +39,7 @@ enumerate_contacts(CNContactStore *contactStore,
     }];
     if (!success) {
         struct error *e = alloc_error(error_type_foundation, (int)error.code, error.localizedDescription.UTF8String);
-        receive_contacts(NULL, 0, e);
+        receive_contacts(options, NULL, 0, e);
         return;
     }
     
@@ -53,23 +52,23 @@ enumerate_contacts(CNContactStore *contactStore,
         struct contact *contact = &contacts[i];
         if (CNContactTypePerson == apple_contact.contactType) {
             contact->type = contact_type_person;
-            contact->given_name = copy_string_or_halt(apple_contact.givenName);
-            contact->family_name = copy_string_or_halt(apple_contact.familyName);
-            contact->organization_name = copy_string_or_halt(apple_contact.organizationName);
         } else {
             contact->type = contact_type_organization;
-            contact->organization_name = copy_string_or_halt(apple_contact.organizationName);
         }
+        contact->given_name = copy_string_or_halt(apple_contact.givenName);
+        contact->family_name = copy_string_or_halt(apple_contact.familyName);
+        contact->organization_name = copy_string_or_halt(apple_contact.organizationName);
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        receive_contacts(contacts, contacts_count, NULL);
+        receive_contacts(options, contacts, contacts_count, NULL);
     });
 }
 
 
 static void
-request_access(CNContactStore *contactStore,
+request_access(struct options *options,
+               CNContactStore *contactStore,
                receive_contacts_fn *receive_contacts)
 {
     [contactStore requestAccessForEntityType:CNEntityTypeContacts
@@ -77,13 +76,13 @@ request_access(CNContactStore *contactStore,
      {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (granted) {
-                enumerate_contacts(contactStore, receive_contacts);
+                enumerate_contacts(options, contactStore, receive_contacts);
             } else if (error) {
                 struct error *e = alloc_error(error_type_foundation, (int)error.code, error.localizedDescription.UTF8String);
-                receive_contacts(NULL, 0, e);
+                receive_contacts(options, NULL, 0, e);
             } else {
                 struct error *e = alloc_error(error_type_no_access, 1, "Access to contacts is denied");
-                receive_contacts(NULL, 0, e);
+                receive_contacts(options, NULL, 0, e);
             }
         });
     }];
@@ -91,28 +90,29 @@ request_access(CNContactStore *contactStore,
 
 
 void
-fetch_apple_contacts(receive_contacts_fn *receive_contacts)
+fetch_apple_contacts(struct options *options,
+                     receive_contacts_fn *receive_contacts)
 {
     CNContactStore *contact_store = [CNContactStore new];
     CNAuthorizationStatus status = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts];
     switch (status) {
         case CNAuthorizationStatusNotDetermined:
-            request_access(contact_store, receive_contacts);
+            request_access(options, contact_store, receive_contacts);
             break;
         case CNAuthorizationStatusRestricted:
         {
             struct error *error = alloc_error(error_type_no_access, 1, "Access to contacts is restricted");
-            receive_contacts(NULL, 0, error);
+            receive_contacts(options, NULL, 0, error);
         }
             break;
         case CNAuthorizationStatusDenied:
         {
             struct error *error = alloc_error(error_type_no_access, 1, "Access to contacts is denied");
-            receive_contacts(NULL, 0, error);
+            receive_contacts(options, NULL, 0, error);
         }
             break;
         case CNAuthorizationStatusAuthorized:
-            enumerate_contacts(contact_store, receive_contacts);
+            enumerate_contacts(options, contact_store, receive_contacts);
             break;
         default:
         {

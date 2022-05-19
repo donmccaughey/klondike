@@ -1,5 +1,6 @@
 #include "error.h"
 
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -29,6 +30,13 @@ alloc_error(enum error_type type, int code, char const *message)
     error->type = type;
     error->code = code;
     return error;
+}
+
+
+struct error *
+alloc_stdlib_error(void)
+{
+    return alloc_error(error_type_stdlib, errno, strerror(errno));
 }
 
 
