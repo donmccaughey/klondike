@@ -19,6 +19,8 @@ receive_contacts(struct options *options,
     
     free_contacts(contacts, count);
     free_options(options);
+    
+    exit(0);
 }
 
 

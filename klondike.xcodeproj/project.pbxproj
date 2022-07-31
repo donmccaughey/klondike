@@ -51,6 +51,7 @@
 		D49703072831C92800CD0FED /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		D497030A2831F01900CD0FED /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D497030D2831F2B500CD0FED /* klondike.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = klondike.entitlements; sourceTree = "<group>"; };
+		D4B82BFE28964C2400D662A3 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +96,7 @@
 				D47EBB672836D5DC0045A686 /* src */,
 				D497030D2831F2B500CD0FED /* klondike.entitlements */,
 				D497030A2831F01900CD0FED /* README.md */,
+				D4B82BFE28964C2400D662A3 /* TODO.md */,
 				D49702FD2831C89900CD0FED /* Products */,
 				D49703062831C92800CD0FED /* Frameworks */,
 			);

@@ -60,9 +60,7 @@ enumerate_contacts(struct options *options,
         contact->organization_name = copy_string_or_halt(apple_contact.organizationName);
     }
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        receive_contacts(options, contacts, contacts_count, NULL);
-    });
+    receive_contacts(options, contacts, contacts_count, NULL);
 }
 
 
@@ -74,17 +72,15 @@ request_access(struct options *options,
     [contactStore requestAccessForEntityType:CNEntityTypeContacts
                            completionHandler:^(BOOL granted, NSError *_Nullable error)
      {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (granted) {
-                enumerate_contacts(options, contactStore, receive_contacts);
-            } else if (error) {
-                struct error *e = alloc_error(error_type_foundation, (int)error.code, error.localizedDescription.UTF8String);
-                receive_contacts(options, NULL, 0, e);
-            } else {
-                struct error *e = alloc_error(error_type_no_access, 1, "Access to contacts is denied");
-                receive_contacts(options, NULL, 0, e);
-            }
-        });
+        if (granted) {
+            enumerate_contacts(options, contactStore, receive_contacts);
+        } else if (error) {
+            struct error *e = alloc_error(error_type_foundation, (int)error.code, error.localizedDescription.UTF8String);
+            receive_contacts(options, NULL, 0, e);
+        } else {
+            struct error *e = alloc_error(error_type_no_access, 1, "Access to contacts is denied");
+            receive_contacts(options, NULL, 0, e);
+        }
     }];
 }
 
