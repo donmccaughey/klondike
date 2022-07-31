@@ -6,6 +6,7 @@
 
 
 struct email;
+struct error;
 struct phone;
 
 
@@ -19,6 +20,10 @@ struct contact {
     struct phone *phones;
     int phones_count;
 };
+
+
+void
+clean_up_contact(struct contact *contact);
 
 
 #endif

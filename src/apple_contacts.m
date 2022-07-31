@@ -2,8 +2,18 @@
 
 #import "apple_contacts.h"
 #import "contact.h"
+#import "email.h"
 #import "error.h"
 #import "memory.h"
+
+
+static void *
+alloc_array_or_halt(size_t count, size_t size)
+{
+    void *array = calloc(count, size);
+    if (!array) halt_on_out_of_memory();
+    return array;
+}
 
 
 static char *
@@ -25,8 +35,8 @@ enumerate_contacts(struct options *options,
         CNContactFamilyNameKey,
         CNContactOrganizationNameKey,
         CNContactEmailAddressesKey,
-        CNContactPostalAddressesKey,
         CNContactPhoneNumbersKey,
+        CNContactPostalAddressesKey,
     ];
     CNContactFetchRequest *fetchRequest = [[CNContactFetchRequest alloc] initWithKeysToFetch:keys];
     NSError *error = nil;
@@ -50,6 +60,7 @@ enumerate_contacts(struct options *options,
     for (int i = 0; i < contacts_count; ++i) {
         CNContact *apple_contact = apple_contacts[i];
         struct contact *contact = &contacts[i];
+        
         if (CNContactTypePerson == apple_contact.contactType) {
             contact->type = contact_type_person;
         } else {
@@ -58,6 +69,15 @@ enumerate_contacts(struct options *options,
         contact->given_name = copy_string_or_halt(apple_contact.givenName);
         contact->family_name = copy_string_or_halt(apple_contact.familyName);
         contact->organization_name = copy_string_or_halt(apple_contact.organizationName);
+        
+        contact->emails_count = (int)apple_contact.emailAddresses.count;
+        contact->emails = alloc_array_or_halt(contact->emails_count, sizeof(struct email));
+        for (int i = 0; i < contact->emails_count; ++i) {
+            CNLabeledValue<NSString *> *email = apple_contact.emailAddresses[i];
+            NSString *label = [CNLabeledValue localizedStringForLabel:email.label];
+            contact->emails[i].type = copy_string_or_halt(label);
+            contact->emails[i].address = copy_string_or_halt(email.value);
+        }
     }
     
     receive_contacts(options, contacts, contacts_count, NULL);
