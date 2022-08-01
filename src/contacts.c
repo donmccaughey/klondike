@@ -8,6 +8,7 @@
 #include "csv.h"
 #include "email.h"
 #include "error.h"
+#include "memory.h"
 #include "options.h"
 
 
@@ -58,28 +59,14 @@ write_to_csv(FILE *out, struct contact const *contacts, int count)
     
     struct csv *csv = alloc_csv(out);
     
-    print_field(csv, "type");
-    print_field(csv, "given_name");
-    print_field(csv, "family_name");
-    print_field(csv, "organization_name");
+    print_header(csv, "type");
+    print_header(csv, "given_name");
+    print_header(csv, "family_name");
+    print_header(csv, "organization_name");
     
     for (int i = 0; i < emails_count; ++i) {
-        char *column_name;
-        int chars_formatted = asprintf(&column_name, "email_type_%i", (i + 1));
-        if (chars_formatted < 0) {
-            free_csv(csv);
-            return alloc_stdlib_error();
-        }
-        print_field(csv, column_name);
-        free(column_name);
-        
-        chars_formatted = asprintf(&column_name, "email_%i", (i + 1));
-        if (chars_formatted < 0) {
-            free_csv(csv);
-            return alloc_stdlib_error();
-        }
-        print_field(csv, column_name);
-        free(column_name);
+        print_indexed_header(csv, "email_type", i);
+        print_indexed_header(csv, "email", i);
     }
     
     new_record(csv);

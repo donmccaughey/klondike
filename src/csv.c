@@ -2,7 +2,9 @@
 
 #include <stdbool.h>
 #include <stdlib.h>
+
 #include "error.h"
+#include "memory.h"
 
 
 static bool
@@ -63,6 +65,22 @@ print_field(struct csv *csv, char const *field)
     } else {
         fprintf(csv->out, "%s", field);
     }
+}
+
+
+void
+print_header(struct csv *csv, char const *header)
+{
+    print_field(csv, header);
+}
+
+
+void
+print_indexed_header(struct csv *csv, char const *header, int index)
+{
+    char *indexed_header = strf_or_halt("%s_%i", header, (index + 1));
+    print_header(csv, indexed_header);
+    free(indexed_header);
 }
 
 

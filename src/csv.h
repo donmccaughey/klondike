@@ -21,6 +21,12 @@ void
 print_field(struct csv *csv, char const *field);
 
 void
+print_header(struct csv *csv, char const *header);
+
+void
+print_indexed_header(struct csv *csv, char const *header, int index);
+
+void
 new_record(struct csv *csv);
 
 
