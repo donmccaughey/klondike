@@ -5,6 +5,7 @@
 #import "email.h"
 #import "error.h"
 #import "memory.h"
+#import "phone.h"
 
 
 static void *
@@ -77,6 +78,15 @@ enumerate_contacts(struct options *options,
             NSString *label = [CNLabeledValue localizedStringForLabel:email.label];
             contact->emails[i].type = copy_string_or_halt(label);
             contact->emails[i].address = copy_string_or_halt(email.value);
+        }
+        
+        contact->phones_count = (int)apple_contact.phoneNumbers.count;
+        contact->phones = alloc_array_or_halt(contact->phones_count, sizeof(struct phone));
+        for (int i = 0; i < contact->phones_count; ++i) {
+            CNLabeledValue<CNPhoneNumber *> *phone = apple_contact.phoneNumbers[i];
+            NSString *label = [CNLabeledValue localizedStringForLabel:phone.label];
+            contact->phones[i].type = copy_string_or_halt(label);
+            contact->phones[i].number = copy_string_or_halt(phone.value.stringValue);
         }
     }
     

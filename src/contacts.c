@@ -10,6 +10,7 @@
 #include "error.h"
 #include "memory.h"
 #include "options.h"
+#include "phone.h"
 
 
 static int
@@ -20,7 +21,12 @@ max(int a, int b)
 
 
 static struct error *
-write_csv_records(struct csv *csv, struct contact const *contacts, int count, int emails_count) {
+write_csv_records(struct csv *csv,
+                  struct contact const *contacts,
+                  int count,
+                  int emails_count,
+                  int phones_count)
+{
     for (int i = 0; i < count; ++i) {        
         struct contact const *contact = &contacts[i];
         switch (contact->type) {
@@ -42,6 +48,16 @@ write_csv_records(struct csv *csv, struct contact const *contacts, int count, in
             }
         }
         
+        for (int i = 0; i < phones_count; ++i) {
+            if (contact->phones_count > i) {
+                print_field(csv, contact->phones[i].type);
+                print_field(csv, contact->phones[i].number);
+            } else {
+                print_field(csv, "");
+                print_field(csv, "");
+            }
+        }
+        
         new_record(csv);
         if (ferror(csv->out)) return alloc_stdlib_error();
     }
@@ -57,6 +73,11 @@ write_to_csv(FILE *out, struct contact const *contacts, int count)
         emails_count = max(emails_count, contacts[i].emails_count);
     }
     
+    int phones_count = 0;
+    for (int i = 0; i < count; ++i) {
+        phones_count = max(phones_count, contacts[i].phones_count);
+    }
+    
     struct csv *csv = alloc_csv(out);
     
     print_header(csv, "type");
@@ -69,10 +90,15 @@ write_to_csv(FILE *out, struct contact const *contacts, int count)
         print_indexed_header(csv, "email", i);
     }
     
+    for (int i = 0; i < phones_count; ++i) {
+        print_indexed_header(csv, "phone_type", i);
+        print_indexed_header(csv, "phone", i);
+    }
+    
     new_record(csv);
     if (ferror(csv->out)) return alloc_stdlib_error();
 
-    struct error *error = write_csv_records(csv, contacts, count, emails_count);
+    struct error *error = write_csv_records(csv, contacts, count, emails_count, phones_count);
     free_csv(csv);
     return error;
 }
