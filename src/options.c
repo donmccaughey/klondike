@@ -22,9 +22,15 @@ static struct option long_options[] = {
         .flag=NULL,
         .val='c',
     },
+    {
+        .name="statistics",
+        .has_arg=no_argument,
+        .flag=NULL,
+        .val='s',
+    },
 };
 
-static char const short_options[] = "?c:h";
+static char const short_options[] = "?c:hs";
 
 
 static noreturn void
@@ -37,6 +43,7 @@ print_usage_and_exit(void)
     fprintf(out, "  -?, -h, --help        Show this help message\n");
     fprintf(out, "  -c, --csv-path PATH   Path to write contacts in CSV format\n");
     fprintf(out, "                        (defaults to standard output)\n");
+    fprintf(out, "  -s, --statistics      Print information about the contacts\n");
     fprintf(out, "\n");
     exit(EXIT_FAILURE);
 }
@@ -54,6 +61,9 @@ alloc_options(int argc, char *argv[])
         switch (ch) {
             case 'c':
                 options->csv_path = strdup_or_halt(optarg);
+                break;
+            case 's':
+                options->statistics = true;
                 break;
             default:
                 print_usage_and_exit();

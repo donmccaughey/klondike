@@ -2,15 +2,14 @@
 #define APPLE_CONTACTS_H_INCLUDED
 
 
-struct contact;
+struct contacts;
 struct error;
 struct options;
 
 
 typedef void
 (receive_contacts_fn)(struct options *options,
-                      struct contact *contacts,
-                      int count,
+                      struct contacts *contacts,
                       struct error *error);
 
 

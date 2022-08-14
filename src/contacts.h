@@ -7,13 +7,23 @@ struct error;
 struct options;
 
 
+struct contacts {
+    struct contact *contacts;
+    int count;
+    int max_emails_count;
+    int max_phones_count;
+};
+
+
+struct contacts *
+alloc_contacts(int count);
+
 struct error *
 save_contacts(struct options *options,
-              struct contact const *contacts,
-              int count);
+              struct contacts const *contacts);
 
 void
-free_contacts(struct contact *contacts, int count);
+free_contacts(struct contacts *contacts);
 
 
 #endif

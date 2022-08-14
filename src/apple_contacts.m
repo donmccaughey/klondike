@@ -2,10 +2,15 @@
 
 #import "apple_contacts.h"
 #import "contact.h"
+#import "contacts.h"
 #import "email.h"
 #import "error.h"
 #import "memory.h"
 #import "phone.h"
+
+
+static void
+max_of(int *a, int b);
 
 
 static void *
@@ -50,17 +55,16 @@ enumerate_contacts(struct options *options,
     }];
     if (!success) {
         struct error *e = alloc_error(error_type_foundation, (int)error.code, error.localizedDescription.UTF8String);
-        receive_contacts(options, NULL, 0, e);
+        receive_contacts(options, NULL, e);
         return;
     }
     
     int contacts_count = (int)apple_contacts.count;
-    struct contact *contacts = calloc(contacts_count, sizeof(struct contact));
-    if (!contacts) halt_on_out_of_memory();
+    struct contacts *contacts = alloc_contacts(contacts_count);
     
     for (int i = 0; i < contacts_count; ++i) {
         CNContact *apple_contact = apple_contacts[i];
-        struct contact *contact = &contacts[i];
+        struct contact *contact = &contacts->contacts[i];
         
         if (CNContactTypePerson == apple_contact.contactType) {
             contact->type = contact_type_person;
@@ -72,6 +76,7 @@ enumerate_contacts(struct options *options,
         contact->organization_name = copy_string_or_halt(apple_contact.organizationName);
         
         contact->emails_count = (int)apple_contact.emailAddresses.count;
+        max_of(&contacts->max_emails_count, contact->emails_count);
         contact->emails = alloc_array_or_halt(contact->emails_count, sizeof(struct email));
         for (int i = 0; i < contact->emails_count; ++i) {
             CNLabeledValue<NSString *> *email = apple_contact.emailAddresses[i];
@@ -81,6 +86,7 @@ enumerate_contacts(struct options *options,
         }
         
         contact->phones_count = (int)apple_contact.phoneNumbers.count;
+        max_of(&contacts->max_phones_count, contact->phones_count);
         contact->phones = alloc_array_or_halt(contact->phones_count, sizeof(struct phone));
         for (int i = 0; i < contact->phones_count; ++i) {
             CNLabeledValue<CNPhoneNumber *> *phone = apple_contact.phoneNumbers[i];
@@ -90,7 +96,14 @@ enumerate_contacts(struct options *options,
         }
     }
     
-    receive_contacts(options, contacts, contacts_count, NULL);
+    receive_contacts(options, contacts, NULL);
+}
+
+
+static void
+max_of(int *a, int b)
+{
+    if (b > *a) *a = b;
 }
 
 
@@ -106,10 +119,10 @@ request_access(struct options *options,
             enumerate_contacts(options, contactStore, receive_contacts);
         } else if (error) {
             struct error *e = alloc_error(error_type_foundation, (int)error.code, error.localizedDescription.UTF8String);
-            receive_contacts(options, NULL, 0, e);
+            receive_contacts(options, NULL, e);
         } else {
             struct error *e = alloc_error(error_type_no_access, 1, "Access to contacts is denied");
-            receive_contacts(options, NULL, 0, e);
+            receive_contacts(options, NULL, e);
         }
     }];
 }
@@ -128,13 +141,13 @@ fetch_apple_contacts(struct options *options,
         case CNAuthorizationStatusRestricted:
         {
             struct error *error = alloc_error(error_type_no_access, 1, "Access to contacts is restricted");
-            receive_contacts(options, NULL, 0, error);
+            receive_contacts(options, NULL, error);
         }
             break;
         case CNAuthorizationStatusDenied:
         {
             struct error *error = alloc_error(error_type_no_access, 1, "Access to contacts is denied");
-            receive_contacts(options, NULL, 0, error);
+            receive_contacts(options, NULL, error);
         }
             break;
         case CNAuthorizationStatusAuthorized:

@@ -2,8 +2,12 @@
 #define OPTIONS_H_INCLUDED
 
 
+#include <stdbool.h>
+
+
 struct options {
     char *csv_path;
+    bool statistics;
 };
 
 

@@ -8,16 +8,15 @@
 
 void
 receive_contacts(struct options *options,
-                 struct contact *contacts,
-                 int count,
+                 struct contacts *contacts,
                  struct error *error)
 {
     if (error) halt_on_error(error);
     
-    error = save_contacts(options, contacts, count);
+    error = save_contacts(options, contacts);
     if (error) halt_on_error(error);
     
-    free_contacts(contacts, count);
+    free_contacts(contacts);
     free_options(options);
     
     exit(0);
