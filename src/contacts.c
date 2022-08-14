@@ -111,7 +111,11 @@ save_contacts(struct options *options,
 {
     FILE *out = stdout;
     if (options->csv_path) {
-        // TODO: open CSV output file
+        out = fopen(options->csv_path, "w");
+        if (!out) {
+            struct error *error = alloc_stdlib_error();
+            halt_on_error(error);
+        }
     }
     struct error *error = write_to_csv(out, contacts, count);
     if (options->csv_path) fclose(out);
