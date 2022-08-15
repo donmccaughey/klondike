@@ -87,8 +87,11 @@ write_to_csv(FILE *out, struct contacts const *contacts)
 static struct error *
 write_statistics(FILE *out, struct contacts const *contacts)
 {
-    fprintf(out, "\n");
     fprintf(out, "Contacts count: %i\n", contacts->count);
+    fprintf(out, "Persons count: %i\n", contacts->persons_count);
+    fprintf(out, "Organizations count: %i\n", contacts->organizations_count);
+    fprintf(out, "Total emails count: %i\n", contacts->total_emails_count);
+    fprintf(out, "Total phones count: %i\n", contacts->total_phones_count);
     fprintf(out, "Max emails count: %i\n", contacts->max_emails_count);
     fprintf(out, "Max phones count: %i\n", contacts->max_phones_count);
     return ferror(out) ? alloc_stdlib_error() : NULL;
@@ -123,7 +126,7 @@ save_contacts(struct options *options,
     struct error *error = write_to_csv(out, contacts);
     
     if (!error && options->statistics) {
-        error = write_statistics(out, contacts);
+        error = write_statistics(stdout, contacts);
     }
     
     if (options->csv_path) fclose(out);

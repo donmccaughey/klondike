@@ -68,14 +68,17 @@ enumerate_contacts(struct options *options,
         
         if (CNContactTypePerson == apple_contact.contactType) {
             contact->type = contact_type_person;
+            ++contacts->persons_count;
         } else {
             contact->type = contact_type_organization;
+            ++contacts->organizations_count;
         }
         contact->given_name = copy_string_or_halt(apple_contact.givenName);
         contact->family_name = copy_string_or_halt(apple_contact.familyName);
         contact->organization_name = copy_string_or_halt(apple_contact.organizationName);
         
         contact->emails_count = (int)apple_contact.emailAddresses.count;
+        contacts->total_emails_count += contact->emails_count;
         max_of(&contacts->max_emails_count, contact->emails_count);
         contact->emails = alloc_array_or_halt(contact->emails_count, sizeof(struct email));
         for (int i = 0; i < contact->emails_count; ++i) {
@@ -86,6 +89,7 @@ enumerate_contacts(struct options *options,
         }
         
         contact->phones_count = (int)apple_contact.phoneNumbers.count;
+        contacts->total_phones_count += contact->phones_count;
         max_of(&contacts->max_phones_count, contact->phones_count);
         contact->phones = alloc_array_or_halt(contact->phones_count, sizeof(struct phone));
         for (int i = 0; i < contact->phones_count; ++i) {
