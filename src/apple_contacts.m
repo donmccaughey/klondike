@@ -10,6 +10,17 @@
 
 
 static void
+copy_emails_to_contact(NSArray<CNLabeledValue<NSString *> *> *emailAddresses,
+                       struct contact *contact);
+
+static void
+copy_phones_to_contact(NSArray<CNLabeledValue<CNPhoneNumber *> *> *phoneNumbers,
+                       struct contact *contact);
+
+static char *
+copy_string_or_halt(NSString *s);
+
+static void
 max_of(int *a, int b);
 
 
@@ -19,6 +30,64 @@ alloc_array_or_halt(size_t count, size_t size)
     void *array = calloc(count, size);
     if (!array) halt_on_out_of_memory();
     return array;
+}
+
+
+static void
+copy_apple_contact_to_contacts(CNContact *apple_contact,
+                               struct contacts *contacts,
+                               int i)
+{
+    struct contact *contact = &contacts->contacts[i];
+    
+    if (CNContactTypePerson == apple_contact.contactType) {
+        contact->type = contact_type_person;
+        ++contacts->persons_count;
+    } else {
+        contact->type = contact_type_organization;
+        ++contacts->organizations_count;
+    }
+    contact->given_name = copy_string_or_halt(apple_contact.givenName);
+    contact->family_name = copy_string_or_halt(apple_contact.familyName);
+    contact->organization_name = copy_string_or_halt(apple_contact.organizationName);
+    
+    copy_emails_to_contact(apple_contact.emailAddresses, contact);
+    contacts->total_emails_count += contact->emails_count;
+    max_of(&contacts->max_emails_count, contact->emails_count);
+    
+    copy_phones_to_contact(apple_contact.phoneNumbers, contact);
+    contacts->total_phones_count += contact->phones_count;
+    max_of(&contacts->max_phones_count, contact->phones_count);
+}
+
+
+static void
+copy_emails_to_contact(NSArray<CNLabeledValue<NSString *> *> *emailAddresses,
+                       struct contact *contact)
+{
+    contact->emails_count = (int)emailAddresses.count;
+    contact->emails = alloc_array_or_halt(contact->emails_count, sizeof(struct email));
+    for (int i = 0; i < contact->emails_count; ++i) {
+        CNLabeledValue<NSString *> *email = emailAddresses[i];
+        NSString *label = [CNLabeledValue localizedStringForLabel:email.label];
+        contact->emails[i].type = copy_string_or_halt(label);
+        contact->emails[i].address = copy_string_or_halt(email.value);
+    }
+}
+
+
+static void
+copy_phones_to_contact(NSArray<CNLabeledValue<CNPhoneNumber *> *> *phoneNumbers,
+                       struct contact *contact)
+{
+    contact->phones_count = (int)phoneNumbers.count;
+    contact->phones = alloc_array_or_halt(contact->phones_count, sizeof(struct phone));
+    for (int i = 0; i < contact->phones_count; ++i) {
+        CNLabeledValue<CNPhoneNumber *> *phone = phoneNumbers[i];
+        NSString *label = [CNLabeledValue localizedStringForLabel:phone.label];
+        contact->phones[i].type = copy_string_or_halt(label);
+        contact->phones[i].number = copy_string_or_halt(phone.value.stringValue);
+    }
 }
 
 
@@ -64,40 +133,7 @@ enumerate_contacts(struct options *options,
     
     for (int i = 0; i < contacts_count; ++i) {
         CNContact *apple_contact = apple_contacts[i];
-        struct contact *contact = &contacts->contacts[i];
-        
-        if (CNContactTypePerson == apple_contact.contactType) {
-            contact->type = contact_type_person;
-            ++contacts->persons_count;
-        } else {
-            contact->type = contact_type_organization;
-            ++contacts->organizations_count;
-        }
-        contact->given_name = copy_string_or_halt(apple_contact.givenName);
-        contact->family_name = copy_string_or_halt(apple_contact.familyName);
-        contact->organization_name = copy_string_or_halt(apple_contact.organizationName);
-        
-        contact->emails_count = (int)apple_contact.emailAddresses.count;
-        contacts->total_emails_count += contact->emails_count;
-        max_of(&contacts->max_emails_count, contact->emails_count);
-        contact->emails = alloc_array_or_halt(contact->emails_count, sizeof(struct email));
-        for (int i = 0; i < contact->emails_count; ++i) {
-            CNLabeledValue<NSString *> *email = apple_contact.emailAddresses[i];
-            NSString *label = [CNLabeledValue localizedStringForLabel:email.label];
-            contact->emails[i].type = copy_string_or_halt(label);
-            contact->emails[i].address = copy_string_or_halt(email.value);
-        }
-        
-        contact->phones_count = (int)apple_contact.phoneNumbers.count;
-        contacts->total_phones_count += contact->phones_count;
-        max_of(&contacts->max_phones_count, contact->phones_count);
-        contact->phones = alloc_array_or_halt(contact->phones_count, sizeof(struct phone));
-        for (int i = 0; i < contact->phones_count; ++i) {
-            CNLabeledValue<CNPhoneNumber *> *phone = apple_contact.phoneNumbers[i];
-            NSString *label = [CNLabeledValue localizedStringForLabel:phone.label];
-            contact->phones[i].type = copy_string_or_halt(label);
-            contact->phones[i].number = copy_string_or_halt(phone.value.stringValue);
-        }
+        copy_apple_contact_to_contacts(apple_contact, contacts, i);
     }
     
     receive_contacts(options, contacts, NULL);
