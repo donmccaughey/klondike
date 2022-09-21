@@ -42,5 +42,9 @@ halt_on_out_of_memory(void);
 void
 print_error(struct error const *error);
 
+void
+report_error(char const *format, ...)
+__attribute__((format (printf, 1, 2)));
+
 
 #endif

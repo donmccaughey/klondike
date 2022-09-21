@@ -13,6 +13,13 @@
 #include "phone.h"
 
 
+static int
+min(int a, int b)
+{
+    return a < b ? a : b;
+}
+
+
 static struct error *
 write_csv_records(struct csv *csv,
                   struct contacts const *contacts)
@@ -28,7 +35,8 @@ write_csv_records(struct csv *csv,
         print_field(csv, contact->family_name);
         print_field(csv, contact->organization_name);
         
-        for (int i = 0; i < contacts->max_emails_count; ++i) {
+        int emails_limit = min(contacts->max_emails_count, contacts->emails_limit);
+        for (int i = 0; i < emails_limit; ++i) {
             if (contact->emails_count > i) {
                 print_field(csv, contact->emails[i].type);
                 print_field(csv, contact->emails[i].address);
@@ -38,7 +46,8 @@ write_csv_records(struct csv *csv,
             }
         }
         
-        for (int i = 0; i < contacts->max_phones_count; ++i) {
+        int phones_limit = min(contacts->max_phones_count, contacts->phones_limit);
+        for (int i = 0; i < phones_limit; ++i) {
             if (contact->phones_count > i) {
                 print_field(csv, contact->phones[i].type);
                 print_field(csv, contact->phones[i].number);
@@ -56,7 +65,8 @@ write_csv_records(struct csv *csv,
 
 
 static struct error *
-write_to_csv(FILE *out, struct contacts const *contacts)
+write_to_csv(FILE *out,
+             struct contacts const *contacts)
 {
     struct csv *csv = alloc_csv(out);
     
@@ -65,12 +75,14 @@ write_to_csv(FILE *out, struct contacts const *contacts)
     print_header(csv, "family_name");
     print_header(csv, "organization_name");
     
-    for (int i = 0; i < contacts->max_emails_count; ++i) {
+    int emails_limit = min(contacts->max_emails_count, contacts->emails_limit);
+    for (int i = 0; i < emails_limit; ++i) {
         print_indexed_header(csv, "email_type", i);
         print_indexed_header(csv, "email", i);
     }
     
-    for (int i = 0; i < contacts->max_phones_count; ++i) {
+    int phones_limit = min(contacts->max_phones_count, contacts->phones_limit);
+    for (int i = 0; i < phones_limit; ++i) {
         print_indexed_header(csv, "phone_type", i);
         print_indexed_header(csv, "phone", i);
     }
@@ -99,7 +111,7 @@ write_statistics(FILE *out, struct contacts const *contacts)
 
 
 struct contacts *
-alloc_contacts(int count)
+alloc_contacts(int count, struct options *options)
 {
     struct contacts *contacts = calloc(1, sizeof(struct contacts));
     if (!contacts) halt_on_out_of_memory();
@@ -108,6 +120,8 @@ alloc_contacts(int count)
     if (!contacts->contacts) halt_on_out_of_memory();
     
     contacts->count = count;
+    contacts->emails_limit = options->emails_limit;
+    contacts->phones_limit = options->phones_limit;
     
     return contacts;
 }

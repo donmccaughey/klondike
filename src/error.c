@@ -1,6 +1,7 @@
 #include "error.h"
 
 #include <errno.h>
+#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -83,4 +84,15 @@ print_error(struct error const *error)
     } else {
         fprintf(stderr, "Error: %s\n", error->message);
     }
+}
+
+
+void
+report_error(char const *format, ...)
+{
+    va_list arguments;
+    va_start(arguments, format);
+    vfprintf(stderr, format, arguments);
+    fprintf(stderr, "\n");
+    va_end(arguments);
 }
