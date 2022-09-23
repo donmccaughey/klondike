@@ -192,8 +192,7 @@ fetch_apple_contacts(receive_contacts receive_contacts)
             break;
         default:
         {
-            char *message;
-            asprintf(&message, "Unexpected CNAuthorizationStatus %li\n", (long)status);
+            char *message = strf_or_halt("Unexpected CNAuthorizationStatus %li\n", (long)status);
             halt_on_internal_error(message);
         }
             break;
