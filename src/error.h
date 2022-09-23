@@ -7,10 +7,16 @@
 
 enum error_type {
     error_type_unknown = 0,
-    error_type_out_of_memory,
     error_type_stdlib,
     error_type_foundation,
-    error_type_no_access,
+    error_tyoe_klondike,
+};
+
+
+enum error_code {
+    error_code_unknown = 0,
+    error_code_out_of_memory,
+    error_code_no_access,
 };
 
 

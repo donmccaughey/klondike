@@ -10,8 +10,8 @@
 static char out_of_memory_error_message[] = "Out of memory";
 
 static struct error out_of_memory_error = {
-    .type=error_type_out_of_memory,
-    .code=1,
+    .type=error_tyoe_klondike,
+    .code=error_code_out_of_memory,
     .message=out_of_memory_error_message,
 };
 
