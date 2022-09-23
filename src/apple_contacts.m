@@ -129,7 +129,7 @@ enumerate_contacts(struct options *options,
     }
     
     int contacts_count = (int)apple_contacts.count;
-    struct contacts *contacts = alloc_contacts(contacts_count, options);
+    struct contacts *contacts = alloc_contacts(contacts_count);
     
     for (int i = 0; i < contacts_count; ++i) {
         CNContact *apple_contact = apple_contacts[i];

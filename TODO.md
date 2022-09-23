@@ -1,7 +1,5 @@
 #  To Do
 
-- option to limit number of phone numbers output
-- option to limit number of emails output
 - include postal addresses in output
 - include notes in output
 - suppress NSLog message when calling `-enumerateContactsWithFetchRequest:`
