@@ -8,4 +8,8 @@ struct phone {
 };
 
 
+void
+clean_up_phone(struct phone *phone);
+
+
 #endif

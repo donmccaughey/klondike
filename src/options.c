@@ -31,6 +31,12 @@ static struct option long_options[] = {
         .val='c',
     },
     {
+        .name="addresses-limit",
+        .has_arg=required_argument,
+        .flag=&long_option_only,
+        .val=0,
+    },
+    {
         .name="emails-limit",
         .has_arg=required_argument,
         .flag=&long_option_only,
@@ -78,6 +84,7 @@ print_usage_and_exit(void)
     fprintf(out, "  -c, --csv-path PATH   Path to write contacts in CSV format\n");
     fprintf(out, "                        (defaults to standard output)\n");
     fprintf(out, "  -s, --statistics      Print information about the contacts\n");
+    fprintf(out, "  --addresses-limit N   Only write N addresses\n");
     fprintf(out, "  --emails-limit N      Only write N emails\n");
     fprintf(out, "  --phones-limit N      Only write N phones\n");
     fprintf(out, "\n");
@@ -98,6 +105,7 @@ alloc_options(int argc, char *argv[])
     struct options *options = calloc(1, sizeof(struct options));
     if (!options) halt_on_out_of_memory();
     
+    options->addresses_limit = INT_MAX;
     options->emails_limit = INT_MAX;
     options->phones_limit = INT_MAX;
     
@@ -113,7 +121,15 @@ alloc_options(int argc, char *argv[])
                 options->statistics = true;
                 break;
             case 0:
-                if (STR_EQ("emails-limit", long_options[i].name)) {
+                if (STR_EQ("addresses-limit", long_options[i].name)) {
+                    long addresses_limit = to_long(optarg);
+                    if (is_valid_limit(addresses_limit)) {
+                        options->addresses_limit = (int)addresses_limit;
+                    } else {
+                        report_error("Invalid addresses limit '%s'", optarg);
+                        ++error_count;
+                    }
+                } else if (STR_EQ("emails-limit", long_options[i].name)) {
                     long emails_limit = to_long(optarg);
                     if (is_valid_limit(emails_limit)) {
                         options->emails_limit = (int)emails_limit;

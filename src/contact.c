@@ -1,6 +1,7 @@
 #include "contact.h"
 
 #include <stdlib.h>
+#include "address.h"
 #include "email.h"
 #include "phone.h"
 
@@ -14,15 +15,18 @@ clean_up_contact(struct contact *contact)
     free(contact->family_name);
     free(contact->organization_name);
     
+    for (int i = 0; i < contact->addresses_count; ++i) {
+        clean_up_address(&contact->addresses[i]);
+    }
+    free(contact->addresses);
+    
     for (int i = 0; i < contact->emails_count; ++i) {
-        free(contact->emails[i].type);
-        free(contact->emails[i].address);
+        clean_up_email(&contact->emails[i]);
     }
     free(contact->emails);
     
     for (int i = 0; i < contact->phones_count; ++i) {
-        free(contact->phones[i].type);
-        free(contact->phones[i].number);
+        clean_up_phone(&contact->phones[i]);
     }
     free(contact->phones);
 }

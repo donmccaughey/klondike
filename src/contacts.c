@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "address.h"
 #include "contact.h"
 #include "csv.h"
 #include "email.h"
@@ -35,6 +36,25 @@ write_csv_records(struct csv *csv,
         print_field(csv, contact->given_name);
         print_field(csv, contact->family_name);
         print_field(csv, contact->organization_name);
+        
+        int addresses_limit = min(contacts->max_addresses_count, options->addresses_limit);
+        for (int i = 0; i < addresses_limit; ++i) {
+            if (contact->addresses_count > i) {
+                print_field(csv, contact->addresses[i].type);
+                print_field(csv, contact->addresses[i].street);
+                print_field(csv, contact->addresses[i].city);
+                print_field(csv, contact->addresses[i].state);
+                print_field(csv, contact->addresses[i].postal_code);
+                print_field(csv, contact->addresses[i].country_code);
+            } else {
+                print_field(csv, "");
+                print_field(csv, "");
+                print_field(csv, "");
+                print_field(csv, "");
+                print_field(csv, "");
+                print_field(csv, "");
+            }
+        }
         
         int emails_limit = min(contacts->max_emails_count, options->emails_limit);
         for (int i = 0; i < emails_limit; ++i) {
@@ -77,6 +97,16 @@ write_to_csv(FILE *out,
     print_header(csv, "family_name");
     print_header(csv, "organization_name");
     
+    int addresses_limit = min(contacts->max_addresses_count, options->addresses_limit);
+    for (int i = 0; i < addresses_limit; ++i) {
+        print_indexed_header(csv, "address_type", i);
+        print_indexed_header(csv, "street", i);
+        print_indexed_header(csv, "city", i);
+        print_indexed_header(csv, "state", i);
+        print_indexed_header(csv, "postal_code", i);
+        print_indexed_header(csv, "country_code", i);
+    }
+    
     int emails_limit = min(contacts->max_emails_count, options->emails_limit);
     for (int i = 0; i < emails_limit; ++i) {
         print_indexed_header(csv, "email_type", i);
@@ -104,8 +134,10 @@ write_statistics(FILE *out, struct contacts const *contacts)
     fprintf(out, "Contacts count: %i\n", contacts->count);
     fprintf(out, "Persons count: %i\n", contacts->persons_count);
     fprintf(out, "Organizations count: %i\n", contacts->organizations_count);
+    fprintf(out, "Total addresses count: %i\n", contacts->total_addresses_count);
     fprintf(out, "Total emails count: %i\n", contacts->total_emails_count);
     fprintf(out, "Total phones count: %i\n", contacts->total_phones_count);
+    fprintf(out, "Max addresses count: %i\n", contacts->max_addresses_count);
     fprintf(out, "Max emails count: %i\n", contacts->max_emails_count);
     fprintf(out, "Max phones count: %i\n", contacts->max_phones_count);
     return ferror(out) ? alloc_stdlib_error() : NULL;

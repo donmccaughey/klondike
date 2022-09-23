@@ -12,8 +12,10 @@ struct contacts {
     int count;
     int persons_count;
     int organizations_count;
+    int total_addresses_count;
     int total_emails_count;
     int total_phones_count;
+    int max_addresses_count;
     int max_emails_count;
     int max_phones_count;
 };

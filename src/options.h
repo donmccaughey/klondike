@@ -7,6 +7,7 @@
 
 struct options {
     char *csv_path;
+    int addresses_limit;
     int emails_limit;
     int phones_limit;
     bool statistics;

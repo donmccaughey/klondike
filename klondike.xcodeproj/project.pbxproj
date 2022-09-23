@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D41A3C9728DD67B00097237D /* address.c in Sources */ = {isa = PBXBuildFile; fileRef = D41A3C9628DD67B00097237D /* address.c */; };
+		D41A3C9928DD695B0097237D /* email.c in Sources */ = {isa = PBXBuildFile; fileRef = D41A3C9828DD695B0097237D /* email.c */; };
+		D41A3C9B28DD69CC0097237D /* phone.c in Sources */ = {isa = PBXBuildFile; fileRef = D41A3C9A28DD69CC0097237D /* phone.c */; };
 		D47EBB792836D5DC0045A686 /* contacts.c in Sources */ = {isa = PBXBuildFile; fileRef = D47EBB6C2836D5DC0045A686 /* contacts.c */; };
 		D47EBB7A2836D5DC0045A686 /* memory.c in Sources */ = {isa = PBXBuildFile; fileRef = D47EBB6D2836D5DC0045A686 /* memory.c */; };
 		D47EBB7B2836D5DC0045A686 /* apple_contacts.m in Sources */ = {isa = PBXBuildFile; fileRef = D47EBB6E2836D5DC0045A686 /* apple_contacts.m */; };
@@ -31,6 +34,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D41A3C9528DD67B00097237D /* address.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = address.h; sourceTree = "<group>"; };
+		D41A3C9628DD67B00097237D /* address.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = address.c; sourceTree = "<group>"; };
+		D41A3C9828DD695B0097237D /* email.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = email.c; sourceTree = "<group>"; };
+		D41A3C9A28DD69CC0097237D /* phone.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = phone.c; sourceTree = "<group>"; };
 		D47EBB682836D5DC0045A686 /* csv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = csv.h; sourceTree = "<group>"; };
 		D47EBB692836D5DC0045A686 /* error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = error.h; sourceTree = "<group>"; };
 		D47EBB6A2836D5DC0045A686 /* email.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = email.h; sourceTree = "<group>"; };
@@ -71,6 +78,8 @@
 		D47EBB672836D5DC0045A686 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				D41A3C9528DD67B00097237D /* address.h */,
+				D41A3C9628DD67B00097237D /* address.c */,
 				D47EBB762836D5DC0045A686 /* apple_contacts.h */,
 				D47EBB6E2836D5DC0045A686 /* apple_contacts.m */,
 				D47EBB772836D5DC0045A686 /* contact_type.h */,
@@ -81,6 +90,7 @@
 				D47EBB682836D5DC0045A686 /* csv.h */,
 				D47EBB712836D5DC0045A686 /* csv.c */,
 				D47EBB6A2836D5DC0045A686 /* email.h */,
+				D41A3C9828DD695B0097237D /* email.c */,
 				D47EBB692836D5DC0045A686 /* error.h */,
 				D47EBB722836D5DC0045A686 /* error.c */,
 				D47EBB732836D5DC0045A686 /* main.m */,
@@ -89,6 +99,7 @@
 				D47EBB6F2836D5DC0045A686 /* options.h */,
 				D47EBB782836D5DC0045A686 /* options.c */,
 				D47EBB6B2836D5DC0045A686 /* phone.h */,
+				D41A3C9A28DD69CC0097237D /* phone.c */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -180,12 +191,15 @@
 			files = (
 				D47EBB7E2836D5DC0045A686 /* main.m in Sources */,
 				D47EBB7C2836D5DC0045A686 /* csv.c in Sources */,
+				D41A3C9728DD67B00097237D /* address.c in Sources */,
 				D47EBB7F2836D5DC0045A686 /* options.c in Sources */,
 				D47EBB792836D5DC0045A686 /* contacts.c in Sources */,
 				D47EBB7B2836D5DC0045A686 /* apple_contacts.m in Sources */,
 				D47EBB7D2836D5DC0045A686 /* error.c in Sources */,
 				D4B82C002896559200D662A3 /* contact.c in Sources */,
+				D41A3C9928DD695B0097237D /* email.c in Sources */,
 				D47EBB7A2836D5DC0045A686 /* memory.c in Sources */,
+				D41A3C9B28DD69CC0097237D /* phone.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

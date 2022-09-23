@@ -1,5 +1,6 @@
 @import Contacts;
 
+#import "address.h"
 #import "apple_contacts.h"
 #import "contact.h"
 #import "contacts.h"
@@ -8,6 +9,10 @@
 #import "memory.h"
 #import "phone.h"
 
+
+static void
+copy_addresses_to_contact(NSArray<CNLabeledValue<CNPostalAddress *> *> *emailAddresses,
+                          struct contact *contact);
 
 static void
 copy_emails_to_contact(NSArray<CNLabeledValue<NSString *> *> *emailAddresses,
@@ -51,6 +56,10 @@ copy_apple_contact_to_contacts(CNContact *apple_contact,
     contact->family_name = copy_string_or_halt(apple_contact.familyName);
     contact->organization_name = copy_string_or_halt(apple_contact.organizationName);
     
+    copy_addresses_to_contact(apple_contact.postalAddresses, contact);
+    contacts->total_addresses_count += contact->addresses_count;
+    max_of(&contacts->max_addresses_count, contact->addresses_count);
+    
     copy_emails_to_contact(apple_contact.emailAddresses, contact);
     contacts->total_emails_count += contact->emails_count;
     max_of(&contacts->max_emails_count, contact->emails_count);
@@ -58,6 +67,25 @@ copy_apple_contact_to_contacts(CNContact *apple_contact,
     copy_phones_to_contact(apple_contact.phoneNumbers, contact);
     contacts->total_phones_count += contact->phones_count;
     max_of(&contacts->max_phones_count, contact->phones_count);
+}
+
+
+static void
+copy_addresses_to_contact(NSArray<CNLabeledValue<CNPostalAddress *> *> *postalAddresses,
+                          struct contact *contact)
+{
+    contact->addresses_count = (int)postalAddresses.count;
+    contact->addresses = alloc_array_or_halt(contact->addresses_count, sizeof(struct address));
+    for (int i = 0; i < contact->addresses_count; ++i) {
+        CNLabeledValue<CNPostalAddress *> *address = postalAddresses[i];
+        NSString *label = [CNLabeledValue localizedStringForLabel:address.label];
+        contact->addresses[i].type = copy_string_or_halt(label);
+        contact->addresses[i].street = copy_string_or_halt(address.value.street);
+        contact->addresses[i].city = copy_string_or_halt(address.value.city);
+        contact->addresses[i].state = copy_string_or_halt(address.value.state);
+        contact->addresses[i].postal_code = copy_string_or_halt(address.value.postalCode);
+        contact->addresses[i].country_code = copy_string_or_halt(address.value.ISOCountryCode);
+    }
 }
 
 

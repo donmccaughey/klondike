@@ -8,4 +8,8 @@ struct email {
 };
 
 
+void
+clean_up_email(struct email *email);
+
+
 #endif
