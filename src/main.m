@@ -6,29 +6,22 @@
 #import "options.h"
 
 
-void
-receive_contacts(struct options *options,
-                 struct contacts *contacts,
-                 struct error *error)
-{
-    if (error) halt_on_error(error);
-    
-    error = save_contacts(options, contacts);
-    if (error) halt_on_error(error);
-    
-    free_contacts(contacts);
-    free_options(options);
-    
-    exit(0);
-}
-
-
 int
 main(int argc, char *argv[])
 {
     @autoreleasepool {
         struct options *options = alloc_options(argc, argv);
-        fetch_apple_contacts(options, receive_contacts);
+        fetch_apple_contacts(^(struct contacts *contacts, struct error *error) {
+            if (error) halt_on_error(error);
+            
+            error = save_contacts(options, contacts);
+            if (error) halt_on_error(error);
+            
+            free_contacts(contacts);
+            free_options(options);
+            
+            exit(EXIT_SUCCESS);
+        });
         dispatch_main();
     }
     return EXIT_SUCCESS;
