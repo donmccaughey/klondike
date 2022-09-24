@@ -38,6 +38,7 @@
 		D41A3C9628DD67B00097237D /* address.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = address.c; sourceTree = "<group>"; };
 		D41A3C9828DD695B0097237D /* email.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = email.c; sourceTree = "<group>"; };
 		D41A3C9A28DD69CC0097237D /* phone.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = phone.c; sourceTree = "<group>"; };
+		D434F56B28DECD080051FED3 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		D47EBB682836D5DC0045A686 /* csv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = csv.h; sourceTree = "<group>"; };
 		D47EBB692836D5DC0045A686 /* error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = error.h; sourceTree = "<group>"; };
 		D47EBB6A2836D5DC0045A686 /* email.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = email.h; sourceTree = "<group>"; };
@@ -109,6 +110,7 @@
 			children = (
 				D47EBB672836D5DC0045A686 /* src */,
 				D497030D2831F2B500CD0FED /* klondike.entitlements */,
+				D434F56B28DECD080051FED3 /* LICENSE.md */,
 				D497030A2831F01900CD0FED /* README.md */,
 				D4B82BFE28964C2400D662A3 /* TODO.md */,
 				D49702FD2831C89900CD0FED /* Products */,
