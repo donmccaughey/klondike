@@ -37,8 +37,8 @@ write_csv_records(struct csv *csv,
         print_field(csv, contact->family_name);
         print_field(csv, contact->organization_name);
         
-        int addresses_limit = min(contacts->max_addresses_count, options->addresses_limit);
-        for (int i = 0; i < addresses_limit; ++i) {
+        int address_limit = min(contacts->max_addresses_count, options->address_limit);
+        for (int i = 0; i < address_limit; ++i) {
             if (contact->addresses_count > i) {
                 print_field(csv, contact->addresses[i].type);
                 print_field(csv, contact->addresses[i].street);
@@ -58,8 +58,8 @@ write_csv_records(struct csv *csv,
             }
         }
         
-        int emails_limit = min(contacts->max_emails_count, options->emails_limit);
-        for (int i = 0; i < emails_limit; ++i) {
+        int email_limit = min(contacts->max_emails_count, options->email_limit);
+        for (int i = 0; i < email_limit; ++i) {
             if (contact->emails_count > i) {
                 print_field(csv, contact->emails[i].type);
                 print_field(csv, contact->emails[i].address);
@@ -69,8 +69,8 @@ write_csv_records(struct csv *csv,
             }
         }
         
-        int phones_limit = min(contacts->max_phones_count, options->phones_limit);
-        for (int i = 0; i < phones_limit; ++i) {
+        int phone_limit = min(contacts->max_phones_count, options->phone_limit);
+        for (int i = 0; i < phone_limit; ++i) {
             if (contact->phones_count > i) {
                 print_field(csv, contact->phones[i].type);
                 print_field(csv, contact->phones[i].number);
@@ -99,8 +99,8 @@ write_to_csv(FILE *out,
     print_header(csv, "family_name");
     print_header(csv, "organization_name");
     
-    int addresses_limit = min(contacts->max_addresses_count, options->addresses_limit);
-    for (int i = 0; i < addresses_limit; ++i) {
+    int address_limit = min(contacts->max_addresses_count, options->address_limit);
+    for (int i = 0; i < address_limit; ++i) {
         print_indexed_header(csv, "address_type", i);
         print_indexed_header(csv, "street", i);
         print_indexed_header(csv, "location", i);
@@ -110,14 +110,14 @@ write_to_csv(FILE *out,
         print_indexed_header(csv, "country_code", i);
     }
     
-    int emails_limit = min(contacts->max_emails_count, options->emails_limit);
-    for (int i = 0; i < emails_limit; ++i) {
+    int email_limit = min(contacts->max_emails_count, options->email_limit);
+    for (int i = 0; i < email_limit; ++i) {
         print_indexed_header(csv, "email_type", i);
         print_indexed_header(csv, "email", i);
     }
     
-    int phones_limit = min(contacts->max_phones_count, options->phones_limit);
-    for (int i = 0; i < phones_limit; ++i) {
+    int phone_limit = min(contacts->max_phones_count, options->phone_limit);
+    for (int i = 0; i < phone_limit; ++i) {
         print_indexed_header(csv, "phone_type", i);
         print_indexed_header(csv, "phone", i);
     }

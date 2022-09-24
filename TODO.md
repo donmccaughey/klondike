@@ -1,6 +1,5 @@
 #  To Do
 
-- drop plural on --limit option names
 - include notes in output
 - if limit is set to 1, drop numeric field suffix
 - suppress NSLog message when calling `-enumerateContactsWithFetchRequest:`

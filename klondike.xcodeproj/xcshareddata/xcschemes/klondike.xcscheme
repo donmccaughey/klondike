@@ -64,15 +64,15 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--addresses-limit 1"
+            argument = "--address-limit 1"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--emails-limit 3"
+            argument = "--email-limit 3"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--phones-limit 3"
+            argument = "--phone-limit 3"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

@@ -31,19 +31,19 @@ static struct option long_options[] = {
         .val='c',
     },
     {
-        .name="addresses-limit",
+        .name="address-limit",
         .has_arg=required_argument,
         .flag=&long_option_only,
         .val=0,
     },
     {
-        .name="emails-limit",
+        .name="email-limit",
         .has_arg=required_argument,
         .flag=&long_option_only,
         .val=0,
     },
     {
-        .name="phones-limit",
+        .name="phone-limit",
         .has_arg=required_argument,
         .flag=&long_option_only,
         .val=0,
@@ -84,9 +84,9 @@ print_usage_and_exit(void)
     fprintf(out, "  -c, --csv-path PATH   Path to write contacts in CSV format\n");
     fprintf(out, "                        (defaults to standard output)\n");
     fprintf(out, "  -s, --statistics      Print information about the contacts\n");
-    fprintf(out, "  --addresses-limit N   Only write N addresses\n");
-    fprintf(out, "  --emails-limit N      Only write N emails\n");
-    fprintf(out, "  --phones-limit N      Only write N phones\n");
+    fprintf(out, "  --address-limit N     Only write N addresses\n");
+    fprintf(out, "  --email-limit N       Only write N emails\n");
+    fprintf(out, "  --phone-limit N       Only write N phones\n");
     fprintf(out, "\n");
     exit(EXIT_FAILURE);
 }
@@ -105,9 +105,9 @@ alloc_options(int argc, char *argv[])
     struct options *options = calloc(1, sizeof(struct options));
     if (!options) halt_on_out_of_memory();
     
-    options->addresses_limit = INT_MAX;
-    options->emails_limit = INT_MAX;
-    options->phones_limit = INT_MAX;
+    options->address_limit = INT_MAX;
+    options->email_limit = INT_MAX;
+    options->phone_limit = INT_MAX;
     
     int i;
     int ch;
@@ -121,28 +121,28 @@ alloc_options(int argc, char *argv[])
                 options->statistics = true;
                 break;
             case 0:
-                if (STR_EQ("addresses-limit", long_options[i].name)) {
-                    long addresses_limit = to_long(optarg);
-                    if (is_valid_limit(addresses_limit)) {
-                        options->addresses_limit = (int)addresses_limit;
+                if (STR_EQ("address-limit", long_options[i].name)) {
+                    long address_limit = to_long(optarg);
+                    if (is_valid_limit(address_limit)) {
+                        options->address_limit = (int)address_limit;
                     } else {
-                        report_error("Invalid addresses limit '%s'", optarg);
+                        report_error("Invalid address limit '%s'", optarg);
                         ++error_count;
                     }
-                } else if (STR_EQ("emails-limit", long_options[i].name)) {
-                    long emails_limit = to_long(optarg);
-                    if (is_valid_limit(emails_limit)) {
-                        options->emails_limit = (int)emails_limit;
+                } else if (STR_EQ("email-limit", long_options[i].name)) {
+                    long email_limit = to_long(optarg);
+                    if (is_valid_limit(email_limit)) {
+                        options->email_limit = (int)email_limit;
                     } else {
-                        report_error("Invalid emails limit '%s'", optarg);
+                        report_error("Invalid email limit '%s'", optarg);
                         ++error_count;
                     }
-                } else if (STR_EQ("phones-limit", long_options[i].name)) {
-                    long phones_limit = to_long(optarg);
-                    if (is_valid_limit(phones_limit)) {
-                        options->phones_limit = (int)phones_limit;
+                } else if (STR_EQ("phone-limit", long_options[i].name)) {
+                    long phone_limit = to_long(optarg);
+                    if (is_valid_limit(phone_limit)) {
+                        options->phone_limit = (int)phone_limit;
                     } else {
-                        report_error("Invalid phones limit '%s'", optarg);
+                        report_error("Invalid phone limit '%s'", optarg);
                         ++error_count;
                     }
                 }
