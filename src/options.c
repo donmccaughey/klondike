@@ -25,12 +25,6 @@ static struct option long_options[] = {
         .val='?',
     },
     {
-        .name="csv-path",
-        .has_arg=required_argument,
-        .flag=NULL,
-        .val='c',
-    },
-    {
         .name="address-limit",
         .has_arg=required_argument,
         .flag=&long_option_only,
@@ -41,6 +35,12 @@ static struct option long_options[] = {
         .has_arg=required_argument,
         .flag=&long_option_only,
         .val=0,
+    },
+    {
+        .name="output",
+        .has_arg=required_argument,
+        .flag=NULL,
+        .val='o',
     },
     {
         .name="phone-limit",
@@ -60,7 +60,7 @@ static struct option long_options[] = {
     }
 };
 
-static char const short_options[] = "?c:hs";
+static char const short_options[] = "?ho:s";
 
 
 static bool
@@ -80,13 +80,14 @@ print_usage_and_exit(void)
     fprintf(out, "Usage:\n");
     fprintf(out, "  klondike [--csv-path PATH]\n");
     fprintf(out, "\n");
-    fprintf(out, "  -?, -h, --help        Show this help message\n");
-    fprintf(out, "  -c, --csv-path PATH   Path to write contacts in CSV format\n");
-    fprintf(out, "                        (defaults to standard output)\n");
-    fprintf(out, "  -s, --statistics      Print information about the contacts\n");
-    fprintf(out, "  --address-limit N     Only write N addresses\n");
-    fprintf(out, "  --email-limit N       Only write N emails\n");
-    fprintf(out, "  --phone-limit N       Only write N phones\n");
+    fprintf(out, "  -?, -h, --help      Show this help message\n");
+    fprintf(out, "  -o, --output PATH   Path of file to write contacts to\n");
+    fprintf(out, "                      (defaults to the standard output)\n");
+    fprintf(out, "  -s, --statistics    Print information about the contacts\n");
+    fprintf(out, "\n");
+    fprintf(out, "  --address-limit N   Only write N addresses\n");
+    fprintf(out, "  --email-limit N     Only write N emails\n");
+    fprintf(out, "  --phone-limit N     Only write N phones\n");
     fprintf(out, "\n");
     exit(EXIT_FAILURE);
 }
@@ -114,8 +115,8 @@ alloc_options(int argc, char *argv[])
     int error_count = 0;
     while (-1 != (ch = getopt_long(argc, argv, short_options, long_options, &i))) {
         switch (ch) {
-            case 'c':
-                options->csv_path = strdup_or_halt(optarg);
+            case 'o':
+                options->output = strdup_or_halt(optarg);
                 break;
             case 's':
                 options->statistics = true;
@@ -163,6 +164,6 @@ void
 free_options(struct options *options)
 {
     if (!options) return;
-    free(options->csv_path);
+    free(options->output);
     free(options);
 }

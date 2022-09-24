@@ -5,13 +5,14 @@ A command line tool for backing up contacts on macOS.
     Usage:
       klondike [--csv-path PATH]
 
-      -?, -h, --help        Show this help message
-      -c, --csv-path PATH   Path to write contacts in CSV format
-                            (defaults to standard output)
-      -s, --statistics      Print information about the contacts
-      --address-limit N     Only write N addresses
-      --email-limit N       Only write N emails
-      --phone-limit N       Only write N phones
+      -?, -h, --help      Show this help message
+      -o, --output PATH   Path of file to write contacts to
+                          (defaults to the standard output)
+      -s, --statistics    Print information about the contacts
+
+      --address-limit N   Only write N addresses
+      --email-limit N     Only write N emails
+      --phone-limit N     Only write N phones
 
 ## License
 

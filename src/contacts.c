@@ -167,8 +167,8 @@ save_contacts(struct options *options,
               struct contacts const *contacts)
 {
     FILE *out = stdout;
-    if (options->csv_path) {
-        out = fopen(options->csv_path, "w");
+    if (options->output) {
+        out = fopen(options->output, "w");
         if (!out) return alloc_stdlib_error();
     }
     
@@ -178,7 +178,7 @@ save_contacts(struct options *options,
         error = write_statistics(stdout, contacts);
     }
     
-    if (options->csv_path) fclose(out);
+    if (options->output) fclose(out);
     return error;
 }
 
