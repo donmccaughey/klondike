@@ -42,11 +42,13 @@ write_csv_records(struct csv *csv,
             if (contact->addresses_count > i) {
                 print_field(csv, contact->addresses[i].type);
                 print_field(csv, contact->addresses[i].street);
+                print_field(csv, contact->addresses[i].location);
                 print_field(csv, contact->addresses[i].city);
                 print_field(csv, contact->addresses[i].state);
                 print_field(csv, contact->addresses[i].postal_code);
                 print_field(csv, contact->addresses[i].country_code);
             } else {
+                print_field(csv, "");
                 print_field(csv, "");
                 print_field(csv, "");
                 print_field(csv, "");
@@ -101,6 +103,7 @@ write_to_csv(FILE *out,
     for (int i = 0; i < addresses_limit; ++i) {
         print_indexed_header(csv, "address_type", i);
         print_indexed_header(csv, "street", i);
+        print_indexed_header(csv, "location", i);
         print_indexed_header(csv, "city", i);
         print_indexed_header(csv, "state", i);
         print_indexed_header(csv, "postal_code", i);

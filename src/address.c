@@ -10,6 +10,7 @@ clean_up_address(struct address *address)
     
     free(address->type);
     free(address->street);
+    free(address->location);
     free(address->city);
     free(address->state);
     free(address->postal_code);

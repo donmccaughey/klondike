@@ -5,6 +5,7 @@
 struct address {
     char *type;
     char *street;
+    char *location;
     char *city;
     char *state;
     char *postal_code;

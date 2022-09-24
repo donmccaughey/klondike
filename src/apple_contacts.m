@@ -80,7 +80,19 @@ copy_addresses_to_contact(NSArray<CNLabeledValue<CNPostalAddress *> *> *postalAd
         CNLabeledValue<CNPostalAddress *> *address = postalAddresses[i];
         NSString *label = [CNLabeledValue localizedStringForLabel:address.label];
         contact->addresses[i].type = copy_string_or_halt(label);
-        contact->addresses[i].street = copy_string_or_halt(address.value.street);
+        
+        NSArray<NSString *> *lines = [address.value.street componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+        contact->addresses[i].street = copy_string_or_halt(lines[0]);
+        if (1 == lines.count) {
+            contact->addresses[i].location = strdup_or_halt("");
+        } else if (2 == lines.count) {
+            contact->addresses[i].location = copy_string_or_halt(lines[1]);
+        } else {
+            NSArray<NSString *> *locations = [lines subarrayWithRange:NSMakeRange(1, lines.count - 1)];
+            NSString *location = [locations componentsJoinedByString:@", "];
+            contact->addresses[i].location = copy_string_or_halt(location);
+        }
+        
         contact->addresses[i].city = copy_string_or_halt(address.value.city);
         contact->addresses[i].state = copy_string_or_halt(address.value.state);
         contact->addresses[i].postal_code = copy_string_or_halt(address.value.postalCode);
