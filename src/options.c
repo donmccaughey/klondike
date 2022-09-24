@@ -78,7 +78,7 @@ print_usage_and_exit(void)
 {
     FILE *out = stdout;
     fprintf(out, "Usage:\n");
-    fprintf(out, "  klondike [--csv-path PATH]\n");
+    fprintf(out, "  klondike [--output PATH]\n");
     fprintf(out, "\n");
     fprintf(out, "  -?, -h, --help      Show this help message\n");
     fprintf(out, "  -o, --output PATH   Path of file to write contacts to\n");

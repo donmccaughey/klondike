@@ -3,7 +3,7 @@
 A command line tool for backing up contacts on macOS.
 
     Usage:
-      klondike [--csv-path PATH]
+      klondike [--output PATH]
 
       -?, -h, --help      Show this help message
       -o, --output PATH   Path of file to write contacts to
