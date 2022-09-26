@@ -82,12 +82,12 @@ print_usage_and_exit(void)
     fprintf(out, "\n");
     fprintf(out, "  -?, -h, --help      Show this help message\n");
     fprintf(out, "  -o, --output PATH   Path of file to write contacts to\n");
-    fprintf(out, "                      (defaults to the standard output)\n");
+    fprintf(out, "                        (defaults to the standard output)\n");
     fprintf(out, "  -s, --statistics    Print information about the contacts\n");
     fprintf(out, "\n");
-    fprintf(out, "  --address-limit N   Only write N addresses\n");
-    fprintf(out, "  --email-limit N     Only write N emails\n");
-    fprintf(out, "  --phone-limit N     Only write N phones\n");
+    fprintf(out, "  --address-limit N   Write up to N addresses\n");
+    fprintf(out, "  --email-limit N     Write up to N emails\n");
+    fprintf(out, "  --phone-limit N     Write up to N phones\n");
     fprintf(out, "\n");
     exit(EXIT_FAILURE);
 }
