@@ -110,7 +110,7 @@ copy_emails_to_contact(NSArray<CNLabeledValue<NSString *> *> *emailAddresses,
     for (int i = 0; i < contact->emails_count; ++i) {
         CNLabeledValue<NSString *> *email = emailAddresses[i];
         NSString *label = [CNLabeledValue localizedStringForLabel:email.label];
-        contact->emails[i].type = copy_string_or_halt(label);
+        contact->emails[i].type = copy_string_or_halt(label ?: @"email");
         contact->emails[i].address = copy_string_or_halt(email.value);
     }
 }
@@ -125,7 +125,7 @@ copy_phones_to_contact(NSArray<CNLabeledValue<CNPhoneNumber *> *> *phoneNumbers,
     for (int i = 0; i < contact->phones_count; ++i) {
         CNLabeledValue<CNPhoneNumber *> *phone = phoneNumbers[i];
         NSString *label = [CNLabeledValue localizedStringForLabel:phone.label];
-        contact->phones[i].type = copy_string_or_halt(label);
+        contact->phones[i].type = copy_string_or_halt(label ?: @"phone");
         contact->phones[i].number = copy_string_or_halt(phone.value.stringValue);
     }
 }
