@@ -9,7 +9,7 @@ enum error_type {
     error_type_unknown = 0,
     error_type_stdlib,
     error_type_foundation,
-    error_tyoe_klondike,
+    error_type_klondike,
 };
 
 

@@ -199,7 +199,7 @@ request_access(CNContactStore *contactStore,
             struct error *e = alloc_error(error_type_foundation, (int)error.code, error.localizedDescription.UTF8String);
             receive_contacts(NULL, e);
         } else {
-            struct error *e = alloc_error(error_tyoe_klondike, error_code_no_access, "Access to contacts is denied");
+            struct error *e = alloc_error(error_type_klondike, error_code_no_access, "Access to contacts is denied");
             receive_contacts(NULL, e);
         }
     }];
@@ -217,13 +217,13 @@ fetch_apple_contacts(receive_contacts receive_contacts)
             break;
         case CNAuthorizationStatusRestricted:
         {
-            struct error *error = alloc_error(error_tyoe_klondike, error_code_no_access, "Access to contacts is restricted");
+            struct error *error = alloc_error(error_type_klondike, error_code_no_access, "Access to contacts is restricted");
             receive_contacts(NULL, error);
         }
             break;
         case CNAuthorizationStatusDenied:
         {
-            struct error *error = alloc_error(error_tyoe_klondike, error_code_no_access, "Access to contacts is denied");
+            struct error *error = alloc_error(error_type_klondike, error_code_no_access, "Access to contacts is denied");
             receive_contacts(NULL, error);
         }
             break;
